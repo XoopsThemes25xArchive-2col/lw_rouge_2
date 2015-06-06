@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- Assign Theme name -->
+<{assign var=theme_name value=$xoTheme->folderName}>
+<meta name="robots" content="<{$xoops_meta_robots}>">
+<meta name="keywords" content="<{$xoops_meta_keywords}>">
+<meta name="description" content="<{$xoops_meta_description}>">
+<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>">
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/xoops.css">
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_themecss}>">
+<title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
+<!-- RMV:  added module header <{$xoops_themecss}>-->
+<{$xoops_module_header}>
+</head>
+<body>
+	<div id="englobe">
+		<div id="header"> 
+			<div id="menu" style="position: absolute; left: 0px; top: 25px ;width: 100%; text-align: center">
+				<{if !$xoops_isuser}>
+					<form action="<{$xoops_url}>/user.php" method="post">
+						<input type="hidden" name="xoops_redirect" value="<{$xoops_requesturi}>" />
+						<input type="hidden" name="op" value="login" />
+						Pseudo : <input class="formButton" type="text" name="uname" size="6"  />&nbsp; 
+						Mot de passe : <input class="formButton" type="password" name="pass" size="7"  />&nbsp;&nbsp;&nbsp;
+						<input class="formButton" type="submit" value="Connexion" />
+					</form>
+				<{/if}>
+				<{if $xoops_isuser}>
+					Bienvenue <a href="<{$xoops_url}>/user.php"><b><{$xoops_uname}>:</b></a> 
+					<a  href="<{$xoops_url}>/user.php">Votre compte</a> |
+					<a href="<{$xoops_url}>/viewpmsg.php">Votre messagerie</a><{if $xoops_isadmin}> |
+					<a href="<{$xoops_url}>/admin.php">Administration</a><{/if}> |
+					<a href="<{$xoops_url}>/user.php?op=logout">Déconnexion</a>
+				<{/if}></div>
+			<div id="menu">
+				<div id="menu_img"><div id="menu_texte"><a target="_blank" href="http://www.linesweb.com/xoops/">Lien</a></div></div>
+				<div id="menu_img"><div id="menu_texte"><a target="_blank" href="http://www.linesweb.com/xoops/">Lien</a></div></div>
+				<div id="menu_img"><div id="menu_texte"><a target="_blank" href="http://www.linesweb.com/xoops/">Lien</a></div></div>
+				<div id="menu_img"><div id="menu_texte"><a target="_blank" href="http://www.linesweb.com/xoops/">Lien</a></div></div>
+				<div id="menu_img"><div id="menu_texte"><a target="_blank" href="http://www.linesweb.com/xoops/">Lien</a></div></div>
+			</div>
+		</div>
+		<div id="contenu">
+			<table cellpadding="0" cellspacing="0" width="715">
+				<tr>
+					
+					<!-- Start left blocks loop -->
+					<{if $xoops_showlblock}>
+					<td style="width:193px;">
+						<div style="margin-left: 5px; width: 185px; margin-right: 5px;">
+							<{foreach item=block from=$xoBlocks.canvas_left}>
+								<{includeq file="$theme_name/theme_blockleft.html"}>
+							<{/foreach}>
+						</div>
+					</td>
+					<{/if}>
+					<!-- End left blocks loop -->
+					
+					
+					<td>
+					
+					<!-- Display center blocks if any -->
+					<{if $xoBlocks.page_topleft or $xoBlocks.page_topcenter or $xoBlocks.page_topright}>
+						<div style="margin-left: 10px; width: 510px; margin-right: 5px;">
+							
+								<!-- Start center-center blocks loop -->
+								<{foreach item=block from=$xoBlocks.page_topcenter}>
+									<{includeq file="$theme_name/theme_blockcenter_c.html"}>
+								<{/foreach}>
+								<!-- End center-center blocks loop -->
+							
+
+								<table style="width: 100%; height: auto">
+									<tr>
+										<td style="width: 50%;">
+											<!-- Start center-left blocks loop -->
+											<{foreach item=block from=$xoBlocks.page_topleft}>
+												<{includeq file="$theme_name/theme_blockcenter_l.html"}>
+											<{/foreach}>
+											<!-- End center-left blocks loop -->
+										</td>
+										<td style="width: 50%;">
+											<!-- Start center-right blocks loop -->
+											<{foreach item=block from=$xoBlocks.page_topright}>
+												<{includeq file="$theme_name/theme_blockcenter_r.html"}>
+											<{/foreach}>
+											<!-- End center-right blocks loop -->
+										</td>
+									</tr>
+								</table>
+
+							</div>
+						<{/if}>
+						
+						<!-- Start content module page -->
+						<div id="" style="clear: both; display: block; padding:10px"><{$xoops_contents}></div>
+						<!-- End content module -->
+						
+						<!-- Start center bottom blocks loop -->
+						<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+							<div style="margin-left: 10px; width: 510px; margin-right: 5px;">
+							
+								<{if $xoBlocks.page_bottomcenter}>
+									<{foreach from=$xoBlocks.page_bottomcenter item=block}>
+										<{include file="$theme_name/theme_blockcenter_c.html"}>
+									<{/foreach}>
+								<{/if}>
+
+								<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright}>
+									<table style="width: 100%; height: auto">
+										<tr>
+											<td style="width: 50%;">
+												<{foreach from=$xoBlocks.page_bottomleft item=block}>
+													<{include file="$theme_name/theme_blockcenter_l.html"}>
+												<{/foreach}>
+											</td>
+
+											<td style="width: 50%;">
+												<{foreach from=$xoBlocks.page_bottomright item=block}>
+													<{include file="$theme_name/theme_blockcenter_r.html"}>
+												<{/foreach}>
+											</td>
+										</tr>
+									</table>
+								<{/if}>
+							
+							</div>
+						<{/if}>
+						<!-- End center bottom blocks loop -->
+						
+						
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="contenu" style="text-align: center">
+			<br /><br />Thème réalisé par TrK et Florian pour <a target="_blank" href="http://www.linesweb.com/xoops/">Linesweb.Xoops</a>.
+		</div>
+	</div>
+</body>
+</html>
